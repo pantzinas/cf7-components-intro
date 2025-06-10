@@ -3,8 +3,19 @@
 // import ArrowFunctionalComponentWithProps from "./components/ArrowFunctionalComponentWithProps.tsx";
 // import ArrowFunctionalComponentWithPropsType from "./components/ArrowFunctionalComponentWithPropsType.tsx";
 // import CodingFactoryLogo from "./components/CodingFactoryLogo.tsx";
-import Layout from "./components/Layout.tsx";
-import OnlineStatus from "./components/OnlineStatus.tsx";
+// import Layout from "./components/Layout.tsx";
+import {BrowserRouter, Routes, Route} from "react-router";
+import HomePage from "./pages/HomePage.tsx";
+import NameChangerPage from "./pages/NameChangerPage.tsx";
+// import Layout from "./components/Layout.tsx";
+import OnlineStatusPage from "./pages/OnlineStatusPage.tsx";
+import UserPage from "./pages/UserPage.tsx";
+import RouterLayout from "./components/RouterLayout.tsx";
+import ExamplesPage from "./pages/ExamplesPage.tsx";
+import RouterExamplesLayout from "./components/RouterExamplesLayout.tsx";
+import AutoRedirectPage from "./pages/AutoRedirectPage.tsx";
+import NotFoundPage from "./pages/NotFoundPage.tsx";
+// import OnlineStatus from "./components/OnlineStatus.tsx";
 // import Todo from "./components/Todo/Todo.tsx";
 // import CounterAdvanced from "./components/CounterAdvanced.tsx";
 // import CounterWithMoreStates from "./components/CounterWithMoreStates.tsx";
@@ -22,7 +33,8 @@ function App() {
   return (
     <>
 
-        <Layout>
+        {/*<Layout>*/}
+
             {/*<ClassComponent />*/}
             {/*<FunctionalComponent />*/}
             {/*<ArrowFunctionalComponent />*/}
@@ -45,8 +57,32 @@ function App() {
             {/*<CounterWithReducer/>*/}
             {/*<Todo/>*/}
             {/*<NameChanger />*/}
-            <OnlineStatus/>
-        </Layout>
+            {/*<OnlineStatus/>*/}
+
+        {/*</Layout>*/}
+
+        <BrowserRouter>
+            {/*<Layout>*/}
+                <Routes>
+                    {/*<Route path="/" element={<HomePage/>} />*/}
+                    <Route element={<RouterLayout />}>
+                        <Route index element={<HomePage/>} />
+                    </Route>
+                    {/*<Route path="examples?"/>*/}
+                    <Route path="examples" element={<RouterExamplesLayout/>}>
+                        <Route index element={<ExamplesPage/>}/>
+                        <Route path="name-changer" element={<NameChangerPage/>}/>
+                        <Route path="online-status" element={<OnlineStatusPage/>}/>
+                        <Route path="auto-redirect" element={<AutoRedirectPage/>}/>
+                    </Route>
+                    <Route path="users/:userId" element={<UserPage />}/>
+                    <Route path="users" element={<UserPage />}/>
+                    {/*<Route path="files/*" element={<FilePage/>}/>*/}
+                    <Route path="*" element={<NotFoundPage />}/>
+                </Routes>
+            {/*</Layout>*/}
+
+        </BrowserRouter>
     </>
   )
 }
